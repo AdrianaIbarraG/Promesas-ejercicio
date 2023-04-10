@@ -148,7 +148,7 @@ let producto = [{"id":1,"title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 L
     card.appendChild(price);
 
     const description=document.createElement("p");
-    description.textContent=producto.description;
+    description.textContent=(producto.description);
     card.appendChild(description);
 
     const category= document.createElement("h3");
@@ -164,10 +164,42 @@ let producto = [{"id":1,"title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 L
    
     });
 
+function getProducto(){ //con fetch
+    let promesa = fetch("https://fakestoreapi.com/products",{
+        method: "GET"
+    });
+
+    promesa.then( (response) => {
+        response.json().then((prods) => {
+            //crear cartas (prods); PONER CÓDIGO PARA LAS CARTAS
+            console.log("prods=>json()");
+            console.log(prods);
+        }//prods
+
+        ) // then Json
+        .catch((err)=>{
+            console.error("Error en el formato de la respuesta: " + err.message);
+        }); // catch Json
+    } // response
+    ) //then
+    .catch( (error)=>{
+        console.error("Error la respuesta " + error.message);
+    });
+} //getproducto
+    
+    getProducto()
+                /* .then((prod)=> console.log(prod))
+                .catch((err)=> console.log(err.message));
+ */
 
 
 
-function getProducto(){
+
+
+
+
+
+/* function getProducto(){
     return new Promise((resolve, reject) => {
         if(producto==null){
             reject(new Error("producto no existe"));
@@ -179,7 +211,7 @@ function getProducto(){
 
 getProducto()
             .then((prod)=> console.log(prod))
-            .catch((err)=> console.log(err.message)); //getProducto si se cumple then haz esto, si no catch haz lo otro
+            .catch((err)=> console.log(err.message)); */ //getProducto si se cumple then haz esto, si no catch haz lo otro
 
 
            /* for( let i=0; i<producto.length; i++){
